@@ -7,7 +7,7 @@
         protected function render($view, $data = []) {
             $blade = new Blade('./app/views', 'storage');
 
-            echo $blade->make($view, $data);
+            echo $blade->make($view, $data)->render();
         }
     }
 ?>
