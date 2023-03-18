@@ -55,5 +55,35 @@
                                                 'brands' => $brands
                                             ]);
         }
+
+        public function saveEditBanner() {
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+            if(!$id){
+                header('location:./banner-manager');
+                die;
+            }
+            
+            $banner = Banner::find($id);
+            if(!$banner) {
+                    header("location: ./banner-manager");
+                    die;
+                }
+
+            $data = $_POST;
+            $banner->fill($data);
+
+            $imgFile = $_FILES['image'];
+            $fileName = $banner->image;
+                
+            if($imgFile['size'] > 0) {
+                    $fileName ='./public/imgs/' .$imgFile['name'];
+                    move_uploaded_file($imgFile['tmp_name'], $fileName);
+                }
+                
+            $banner->image = $fileName;
+            $banner->save();
+            header('location:./banner-manager');
+        }
     }
 ?>

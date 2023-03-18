@@ -91,6 +91,14 @@ use App\Controllers\Admin\BrandController;
             $ctr = new BannerController();
             $ctr->saveAddBanner();
             break;
+        case 'edit-banner':
+            $ctr = new BannerController();
+            $ctr->editBanner();
+            break;
+        case 'save-edit-banner':
+            $ctr = new BannerController();
+            $ctr->saveEditBanner();
+            break;
         default:
             echo 'Đường dẫn không tồn tại';
             break;
