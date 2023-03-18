@@ -8,10 +8,11 @@
     require_once './commons/database-config.php';
 
     use App\Controllers\Admin\AdminHomeController;
-use App\Controllers\Admin\BannerController;
-use App\Controllers\Admin\BrandController;
+    use App\Controllers\Admin\BannerController;
+    use App\Controllers\Admin\BrandController;
     use App\Controllers\User\UserHomeController;
     use App\Controllers\Admin\ProductController;
+    use App\Controllers\Admin\UserController;
 
     switch ($url) {
         case '/':
@@ -98,6 +99,34 @@ use App\Controllers\Admin\BrandController;
         case 'save-edit-banner':
             $ctr = new BannerController();
             $ctr->saveEditBanner();
+            break;
+        case 'delete-banner':
+            $ctr = new BannerController();
+            $ctr->deleteBanner();
+            break;
+        case 'user-manager':
+            $ctr = new UserController();
+            $ctr->index();
+            break;
+        case 'add-user':
+            $ctr = new UserController();
+            $ctr->addUser();
+            break;
+        case 'save-add-user':
+            $ctr = new UserController();
+            $ctr->saveAddUser();
+            break;
+        case 'edit-user':
+            $ctr = new UserController();
+            $ctr->editUser();
+            break;
+        case 'save-edit-user':
+            $ctr = new UserController();
+            $ctr->saveEditUser();
+            break;
+        case 'delete-user':
+            $ctr = new UserController();
+            $ctr->deleteUser();
             break;
         default:
             echo 'Đường dẫn không tồn tại';

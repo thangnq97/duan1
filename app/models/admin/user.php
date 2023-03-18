@@ -5,7 +5,7 @@
     class User extends Model {
         protected $table = "users";
 
-        public $fillable = ['username', 'password', 'email'];
+        public $fillable = ['username', 'password', 'email', 'role'];
 
         public $timestamps = false;
     }

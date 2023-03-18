@@ -85,5 +85,22 @@
             $banner->save();
             header('location:./banner-manager');
         }
+
+        public function deleteBanner() {
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+            if(!$id){
+                header('location:./banner-manager');
+                die;
+            }
+
+            $banner = Banner::find($id);
+            if(!$banner) {
+                    header("location: ./banner-manager");
+                    die;
+            }
+            Banner::destroy($id);
+            header("location: ./banner-manager");
+        }
     }
 ?>

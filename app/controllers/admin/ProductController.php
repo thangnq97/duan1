@@ -47,10 +47,19 @@
         }
 
         public function deleteProduct() {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                Product::destroy($id);
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+            if(!$id){
+                 header("location: ./product-manager");
+                 die;
             }
+                
+            $product = Product::find($id);
+            if(!$product) {
+                header("location: ./product-manager");
+                die;
+            }
+            Product::destroy($id);
             header('location: ./product-manager');
         }
 
