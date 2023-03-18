@@ -11,7 +11,7 @@
             $products = Product::all();
             $brands = Brand::all();
 
-            $this->render('admin.productManager',[
+            $this->render('admin.product.productManager',[
                                                 'products' => $products,
                                                 'brands' => $brands
                                                 ]);
@@ -20,7 +20,7 @@
         public function addProduct() {
             $brands = Brand::all();
 
-            $this->render('admin.addProduct',[
+            $this->render('admin.product.addProduct',[
                                                 'brands' => $brands
                                             ]);
         }
@@ -59,7 +59,7 @@
                 $id = $_GET['id'];
                 $product = Product::find($id);
                 $brands = Brand::all();
-                $this->render('admin.editProduct', [
+                $this->render('admin.product.editProduct', [
                                                     'product' => $product,
                                                     'brands' => $brands
                                                     ]);
