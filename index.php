@@ -137,6 +137,30 @@
             $ctr = new CommentController();
             $ctr->deleteComment();
             break;
+        case 'add-comment':
+            $ctr = new CommentController();
+            $ctr->addComment();
+            break;
+        case 'register':
+            $ctr = new HomeController();
+            $ctr->register();
+            break;
+        case 'save-register':
+            $ctr = new HomeController();
+            $ctr->saveRegister();
+            break;
+        case 'sign-in':
+            $ctr = new HomeController();
+            $ctr->signIn();
+            break;
+        case 'save-sign-in':
+            $ctr = new HomeController();
+            $ctr->saveSignIn();
+            break;
+        case 'sign-out':
+            $ctr = new HomeController();
+            $ctr->signOut();
+            break;
         default:
             echo 'Đường dẫn không tồn tại';
             break;

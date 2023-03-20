@@ -36,5 +36,26 @@
             Comment::destroy($id);
             header('location:./comment-manager');
         }
+
+        public function addComment() {
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+            if(!$id) {
+                header('location:./');
+                die;
+            }
+
+            $product = Product::find($id);
+            if(!$product) {
+                header('location:./');
+                die;
+            }
+
+            $data = $_POST;
+            $comment = new Comment();
+            $comment->fill($data);
+            $comment->save();
+            header("location:./product-detail?id=$id");
+        }
     }
 ?>
