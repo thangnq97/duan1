@@ -10,7 +10,8 @@
     use App\Controllers\Admin\AdminHomeController;
     use App\Controllers\Admin\BannerController;
     use App\Controllers\Admin\BrandController;
-    use App\Controllers\User\UserHomeController;
+    use App\Controllers\Admin\CommentController;
+    use App\Controllers\User\HomeController;
     use App\Controllers\Admin\ProductController;
     use App\Controllers\Admin\UserController;
 
@@ -20,16 +21,16 @@
                 $ctr = new AdminHomeController();
                 $ctr->index();
             }else {
-                $ctr = new UserHomeController();
+                $ctr = new HomeController();
                 $ctr->index();
             }
             break;
         case 'all-product':
-            $ctr = new UserHomeController();
+            $ctr = new HomeController();
             $ctr->allProduct();
             break;
         case 'product-detail':
-            $ctr = new UserHomeController();
+            $ctr = new HomeController();
             $ctr->productDetail();
             break;
         case 'product-manager':
@@ -127,6 +128,14 @@
         case 'delete-user':
             $ctr = new UserController();
             $ctr->deleteUser();
+            break;
+        case 'comment-manager':
+            $ctr = new CommentController();
+            $ctr->index();
+            break;
+        case 'delete-comment':
+            $ctr = new CommentController();
+            $ctr->deleteComment();
             break;
         default:
             echo 'Đường dẫn không tồn tại';

@@ -3,7 +3,7 @@
         'name' => 'thang97/duan1',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '19323baa7834fcff35af6249ac7c0b972b7d158a',
+        'reference' => '3366a1b418229b29e97c8c1975182cedd135aa2a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -256,7 +256,7 @@
         'thang97/duan1' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '19323baa7834fcff35af6249ac7c0b972b7d158a',
+            'reference' => '3366a1b418229b29e97c8c1975182cedd135aa2a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

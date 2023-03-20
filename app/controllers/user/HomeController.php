@@ -5,7 +5,7 @@ use App\Controllers\BaseController;
 use App\Models\Admin\Product;
 use App\Models\Admin\Brand;
     
-    class UserHomeController extends BaseController{
+    class HomeController extends BaseController{
         
         public function index() {
             $listItem = Product::all()->take(9);
