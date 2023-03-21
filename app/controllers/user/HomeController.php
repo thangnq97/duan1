@@ -67,7 +67,7 @@
                 $user->avatar = $fileName;
                 $user->save();
             }
-            header('location:./register');
+            header('location:./sign-in');
         }
 
         public function signIn() {
@@ -82,6 +82,7 @@
                 foreach($users as $user) {
                     if(!empty($_POST['username']) && !empty($_POST['password'])) {
                         if($_POST['username'] == $user->username && $_POST['password'] == $user->password) {
+                            $_SESSION['user']['id'] = $user->id;
                             $_SESSION['user']['username'] = $user->username;
                             $_SESSION['user']['avatar'] = $user->avatar;
                             header('location: ./');
@@ -102,6 +103,58 @@
         public function signOut() {
             session_destroy();
             header('location:./');
+        }
+
+        public function forgotPasswordView() {
+            $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+            $this->render('user.forgotPassword', ['msg' => $msg]);
+        }
+
+        public function forgotPassword() {
+            $users = User::all();
+            if(isset($_POST['submit'])) {
+                $email = $_POST['email'];
+                $username = $_POST['username'];
+                foreach($users as $user) {
+                    if(!empty($email) && !empty($username)) {
+                        if($user->email == $email && $user->username == $username) {
+                            $password = $user->password;
+                            header("location: ./forgot-password?msg=$password");
+                            die;
+                        }
+                    }
+                }
+            }
+            header('location:./forgot-password?msg=không tìm thấy tài khoản');
+        }
+
+        public function editPassword() {
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+
+            if($user) {
+                $this->render('user.rePassword', ['user' => $user]);
+            }else {
+                header('location:./register');
+            }
+        }
+
+        public function saveEditPassword() {
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+            if(!$id) {
+                header('location: ./edit-password');
+                die;
+            }
+
+            $user = User::find($id);
+            if(!$user) {
+                header('location: ./edit-password');
+                die;
+            }
+
+            $password = $_POST['password'];
+            $user->password = $password;
+            $user->save();
+            header('location: ./sign-in');
         }
     }
 ?>

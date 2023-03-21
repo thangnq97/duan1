@@ -161,6 +161,22 @@
             $ctr = new HomeController();
             $ctr->signOut();
             break;
+        case 'forgot-password':
+            $ctr = new HomeController();
+            $ctr->forgotPasswordView();
+            break;
+        case 'check-password':
+            $ctr = new HomeController();
+            $ctr->forgotPassword();
+            break;
+        case 'edit-password':
+            $ctr = new HomeController();
+            $ctr->editPassword();
+            break;
+        case 'save-edit-password':
+            $ctr = new HomeController();
+            $ctr->saveEditPassword();
+            break;
         default:
             echo 'Đường dẫn không tồn tại';
             break;
