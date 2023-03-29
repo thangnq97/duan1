@@ -1,11 +1,11 @@
 <?php
-    namespace App\Models\Admin;
+    namespace App\Models\User;
     use Illuminate\Database\Eloquent\Model;
 
     class BillDetail extends Model {
         protected $table = "bill_detail";
 
-        public $fillable = ['price', 'quanity', 'unit_price', 'bill_id', 'variation_id'];
+        public $fillable = ['total_price', 'bill_id', 'variation_id'];
 
         public $timestamps = false;
     }

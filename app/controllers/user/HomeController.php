@@ -8,6 +8,8 @@
     use App\Models\Admin\Brand;
     use App\Models\Admin\Comment;
     use App\Models\Admin\User;
+use App\Models\User\Size;
+use App\Models\User\Topping;
 
     class HomeController extends BaseController{
         
@@ -30,7 +32,9 @@
         public function productDetail() {
             $id = isset($_GET['id']) ? $_GET['id'] : null;
             if($id) {
-                $user = $_SESSION['user'];
+                $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+                $size = Size::all();
+                $topping = Topping::all();
                 $comments = Comment::where('product_id', '=', $id)->get();
                 $users = User::all();
                 $item = Product::find($id);
@@ -38,12 +42,15 @@
                                                     'item' => $item,
                                                     'comments' => $comments,
                                                     'users' => $users,
-                                                    'user' => $user
+                                                    'user' => $user,
+                                                    'sizes' => $size,
+                                                    'topping' => $topping
                                                     ]);
             }
         }
 
         public function register() {
+            var_dump($_SESSION);die;
             $this->render('user.register',[]);
         }
         
@@ -101,7 +108,7 @@
         }
 
         public function signOut() {
-            session_destroy();
+            unset($_SESSION['user']);
             header('location:./');
         }
 

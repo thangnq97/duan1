@@ -13,17 +13,104 @@
     use App\Controllers\Admin\CommentController;
     use App\Controllers\User\HomeController;
     use App\Controllers\Admin\ProductController;
+    use App\Controllers\Admin\SizeController;
+    use App\Controllers\Admin\ToppingController;
+    use App\Controllers\Admin\VoucherController;
     use App\Controllers\Admin\UserController;
+use App\Controllers\User\Cart;
 
     switch ($url) {
         case '/':
-            if(isset($_SESSION['admin'])) {
-                $ctr = new AdminHomeController();
-                $ctr->index();
-            }else {
-                $ctr = new HomeController();
-                $ctr->index();
-            }
+            $ctr = new HomeController();
+            $ctr->index();
+            break;
+        case 'admin':
+            $ctr = new AdminHomeController();
+            $ctr->index();
+            break;
+        case 'add-cart':
+            $ctr = new Cart();
+            $ctr->addCart();
+            break;
+        case 'show-cart':
+            $ctr = new Cart();
+            $ctr->showCart();
+            break;
+        case 'remove-cart':
+            $ctr = new Cart();
+            $ctr->removeCart();
+            break;
+        case 'voucher-manager':
+            $ctr = new VoucherController();
+            $ctr->index();
+            break;
+        case 'add-voucher':
+            $ctr = new VoucherController();
+            $ctr->addVoucher();
+            break;
+        case 'save-add-voucher':
+            $ctr = new VoucherController();
+            $ctr->saveAddVoucher();
+            break;
+        case 'edit-voucher':
+            $ctr = new VoucherController();
+            $ctr->editVoucher();
+            break;
+        case 'save-edit-voucher':
+            $ctr = new VoucherController();
+            $ctr->saveEditVoucher();
+            break;
+        case 'delete-voucher':
+            $ctr = new VoucherController();
+            $ctr->deleteVoucher();
+            break;
+        case 'topping-manager':
+            $ctr = new ToppingController();
+            $ctr->index();
+            break;
+        case 'add-topping':
+            $ctr = new ToppingController();
+            $ctr->addTopping();
+            break;
+        case 'save-add-topping':
+            $ctr = new ToppingController();
+            $ctr->saveAddTopping();
+            break;
+        case 'edit-topping':
+            $ctr = new ToppingController();
+            $ctr->editTopping();
+            break;
+        case 'save-edit-topping':
+            $ctr = new ToppingController();
+            $ctr->saveEditTopping();
+            break;
+        case 'delete-topping':
+            $ctr = new ToppingController();
+            $ctr->deleteTopping();
+            break;
+        case 'size-manager':
+            $ctr = new SizeController();
+            $ctr->index();
+            break;
+        case 'add-size':
+            $ctr = new SizeController();
+            $ctr->addSize();
+            break;
+        case 'save-add-size':
+            $ctr = new SizeController();
+            $ctr->saveAddSize();
+            break;
+        case 'edit-size':
+            $ctr = new SizeController();
+            $ctr->editSize();
+            break;
+        case 'save-edit-size':
+            $ctr = new SizeController();
+            $ctr->saveEditSize();
+            break;
+        case 'delete-size':
+            $ctr = new SizeController();
+            $ctr->deleteSize();
             break;
         case 'all-product':
             $ctr = new HomeController();
