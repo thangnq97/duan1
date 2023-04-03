@@ -1,0 +1,77 @@
+.container{
+    max-width: 100%;
+    margin: auto;
+}
+.imgfluid{
+    display: block;
+    width: 100%;
+}
+.banner img{
+    background-color: #303030;
+}
+.menu{
+    text-align: center;
+    
+}
+.danhmuc{
+    background-color: black;
+    padding: 20px;
+}
+.danhmuc ul li {
+  list-style-type: none;
+  display: inline;
+  padding: 20px;
+}
+.danhmuc ul li a{
+    color: white;
+    text-decoration: none;
+    transform: 0.5;
+    font-size: 1.3vw;
+}
+.danhmuc ul li a:hover{
+   color: darkgoldenrod;
+}
+
+.content-body{
+    padding: 0 150px;
+}
+.content-item{
+    font-size: 30px;
+    font-weight: bold;
+}
+.content-icon{
+    font-size: 18px;
+}
+.anh {
+    
+    text-align: center;
+}
+.anh img{
+    width: 60%;
+    padding-bottom: 30px;
+}
+.anh-body{
+    
+    padding-top: 50px;
+}
+
+
+.footer{
+    min-height: 350px;
+    background-color: rgb(139, 216, 218);
+   
+}
+.item-footer{
+ 
+    float: left;
+    min-height: 200px;
+    margin: 40px 45px;
+   
+}
+.item-footer img{
+    width: 250px;
+   
+}
+.item-footer p{
+    color: white;
+}
