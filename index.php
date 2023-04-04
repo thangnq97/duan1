@@ -17,7 +17,7 @@
     use App\Controllers\Admin\ToppingController;
     use App\Controllers\Admin\VoucherController;
     use App\Controllers\Admin\UserController;
-use App\Controllers\User\Cart;
+    use App\Controllers\User\Cart;
 
     switch ($url) {
         case '/':
@@ -39,6 +39,10 @@ use App\Controllers\User\Cart;
         case 'remove-cart':
             $ctr = new Cart();
             $ctr->removeCart();
+            break;
+        case 'remove-cart-index':
+            $ctr = new Cart();
+            $ctr->removeCartByIndex();
             break;
         case 'voucher-manager':
             $ctr = new VoucherController();
