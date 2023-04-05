@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-</head>
-<body>
+<?php $__env->startSection('main-content'); ?>
     <table class="table table-stripped">
         <thead>
             <th>ID</th>
             <th>NAME</th>
             <th>IMG</th>
-            <th>DETAIL</th>
+            <th>Price</th>
             <th>BRAND</th>
             <th>
                 <a class="btn btn-success" href="./add-product">Add new</a>
@@ -28,7 +18,7 @@
                 <td>
                     <img src="<?php echo e($pro->image); ?>" style="width: 150px; height: 150px;" alt="">
                 </td>
-                <td><?php echo e($pro->detail); ?></td>
+                <td><?php echo e($pro->price); ?></td>
                 <td>
                     <?php $__currentLoopData = $brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($brand->id == $pro->brand_id): ?> 
@@ -45,5 +35,5 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
-</body>
-</html><?php /**PATH C:\xampp\htdocs\duan1\app\views/admin/product/productManager.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.home', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\duan1\app\views/admin/product/productManager.blade.php ENDPATH**/ ?>

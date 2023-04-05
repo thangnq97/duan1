@@ -28,14 +28,14 @@
                     $user->role = 'user';
                 }
 
-                $imgFile = $_FILES['avatar'];
-                $fileName = '';
-                if($imgFile['size'] > 0) {
-                    $fileName = './public/imgs/' .$imgFile['name'];
-                    move_uploaded_file($imgFile['tmp_name'], $fileName);
-                }
+                // $imgFile = $_FILES['avatar'];
+                // $fileName = '';
+                // if($imgFile['size'] > 0) {
+                //     $fileName = './public/imgs/' .$imgFile['name'];
+                //     move_uploaded_file($imgFile['tmp_name'], $fileName);
+                // }
 
-                $user->avatar = $fileName;
+                // $user->avatar = $fileName;
                 $user->save();
                 header('location: ./user-manager');
             }
@@ -73,15 +73,15 @@
                 $user->role = 'user';
             }
 
-            $imgFile = $_FILES['avatar'];
-            $fileName = $user->avatar;
+            // $imgFile = $_FILES['avatar'];
+            // $fileName = $user->avatar;
             
-            if($imgFile['size'] > 0) {
-                $fileName ='./public/imgs/' .$imgFile['name'];
-                move_uploaded_file($imgFile['tmp_name'], './public/imgs/'.$imgFile['name']);
-            }
+            // if($imgFile['size'] > 0) {
+            //     $fileName ='./public/imgs/' .$imgFile['name'];
+            //     move_uploaded_file($imgFile['tmp_name'], './public/imgs/'.$imgFile['name']);
+            // }
             
-            $user->avatar = $fileName;
+            // $user->avatar = $fileName;
             $user->save();
             header("location: ./user-manager");
         }

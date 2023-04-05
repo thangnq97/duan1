@@ -32,13 +32,14 @@
                 die;
             }
             unset($_SESSION['cart'][$index]);
+            $_SESSION['cart'] = array_values($_SESSION['cart']);
             header('location: ./show-cart');
         }
 
         public function showCart() {
             // echo '<pre>';
             // var_dump($_SESSION['cart']);die;
-            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : null;
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             $data = [];
             $total_price = 0;
             foreach($cart as $item):
@@ -48,11 +49,15 @@
                 $sugar = $item['sugar'];
                 $ice = $item['ice'];
                 $quanity = $item['quanity'];
-                foreach($item['topping'] as $top):
-                    $topping = isset($topping) ? $topping : [];
-                    $top_name = Topping::find($top)->name;
-                    array_push($topping, $top_name);
-                endforeach;
+                if(isset($item['topping'])) {
+                    foreach($item['topping'] as $top):
+                        $topping = isset($topping) ? $topping : [];
+                        $top_name = Topping::find($top)->name;
+                        array_push($topping, $top_name);
+                    endforeach;
+                }else {
+                    $topping = [];
+                }
                 $price = $item[0];
                 array_push($data,[$product, $size, $sugar, $ice, $topping, $quanity, $price]);
                 unset($topping);
