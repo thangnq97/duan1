@@ -44,6 +44,10 @@
             $ctr = new Cart();
             $ctr->removeCartByIndex();
             break;
+        case 'news':
+            $ctr = new HomeController();
+            $ctr->news();
+            break;
         case 'voucher-manager':
             $ctr = new VoucherController();
             $ctr->index();

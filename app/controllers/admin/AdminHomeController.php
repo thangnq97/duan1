@@ -6,7 +6,7 @@
     class AdminHomeController extends BaseController {
         
         public function index() {
-            echo 'Trang chu admin';
+            $this->render('admin.home',[]);
         }
         
         public function addSession() {

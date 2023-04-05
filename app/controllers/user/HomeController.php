@@ -8,13 +8,13 @@
     use App\Models\Admin\Brand;
     use App\Models\Admin\Comment;
     use App\Models\Admin\User;
-use App\Models\User\Size;
-use App\Models\User\Topping;
+    use App\Models\User\Size;
+    use App\Models\User\Topping;
 
     class HomeController extends BaseController{
         
         public function index() {
-            $listItem = Product::all()->take(9);
+            $listItem = Product::all()->take(8);
             $brands = Brand::all();   
             $this->render('user.home', [
                                     'listItem' => $listItem,
@@ -22,10 +22,30 @@ use App\Models\User\Topping;
                                 ]);
         }
 
+        public function news() {
+            $this->render('user.news',[]);
+        }
+
         public function allProduct() {
-            $listItem = Product::all();
+            $msg = '';
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $listItem = Product::where('brand_id',$id)->get();
+            }
+            if(isset($_GET['search'])) {
+                $search = $_GET['search'];
+                $listItem = Product::where('name', 'LIKE', '%'.$search.'%')->get();
+            }else{
+                $msg = 'Không tìm thấy sản phẩm';
+            }
+            if(!isset($_GET['id']) && !isset($_GET['search'])) {
+                $listItem = Product::all();
+            }
+            $brands = Brand::all();
             $this->render('user.allProduct',[
-                                            'listItem' => $listItem
+                                            'listItem' => $listItem,
+                                            'brands' => $brands,
+                                            'msg' => $msg
                                             ]);
         }
 
@@ -50,7 +70,6 @@ use App\Models\User\Topping;
         }
 
         public function register() {
-            var_dump($_SESSION);die;
             $this->render('user.register',[]);
         }
         
@@ -64,14 +83,14 @@ use App\Models\User\Topping;
                     $user->role = 'user';
                 }
 
-                $imgFile = $_FILES['avatar'];
-                $fileName = '';
-                if($imgFile['size'] > 0) {
-                    $fileName = './public/imgs/' .$imgFile['name'];
-                    move_uploaded_file($imgFile['tmp_name'], $fileName);
-                }
+                // $imgFile = $_FILES['avatar'];
+                // $fileName = '';
+                // if($imgFile['size'] > 0) {
+                //     $fileName = './public/imgs/' .$imgFile['name'];
+                //     move_uploaded_file($imgFile['tmp_name'], $fileName);
+                // }
 
-                $user->avatar = $fileName;
+                // $user->avatar = $fileName;
                 $user->save();
             }
             header('location:./sign-in');
@@ -83,6 +102,7 @@ use App\Models\User\Topping;
         }
 
         public function saveSignIn() {
+            // var_dump($_POST);die;
             $msg = '';
             $users = User::all();
             if(isset($_POST['submit'])) {
@@ -91,11 +111,12 @@ use App\Models\User\Topping;
                         if($_POST['username'] == $user->username && $_POST['password'] == $user->password) {
                             $_SESSION['user']['id'] = $user->id;
                             $_SESSION['user']['username'] = $user->username;
-                            $_SESSION['user']['avatar'] = $user->avatar;
+                            $_SESSION['user']['role'] = $user->role;
                             header('location: ./');
                             die;
                         }
                     }else {
+                        var_dump($_POST);die;
                         $msg = 'Tài khoản hoặc mật khẩu không đúng';
                         header("location: ./sign-in?msg=$msg");
                         die;

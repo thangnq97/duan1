@@ -1,27 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title> Trang Login</title>
+     <link rel="stylesheet" href="style.css">
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="./public/css/dangnhap.css">
 </head>
 <body>
-    <div class="container">
-        <form action="./save-sign-in" method="POST">
-            <div class="mb-3 mt-3">
-                <label class="form-label">USERNAME</label>
-                <input type="text" name="username" class="form-control">
+    <section>
+        <!--Bắt Đầu Phần Hình Ảnh-->
+        <div class="img-bg">
+            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-tra-sua-dep-ngon-nhat.jpg" alt="Hình Ảnh Minh Họa">
+        </div>
+        <!--Kết Thúc Phần Hình Ảnh-->
+        <!--Bắt Đầu Phần Nội Dung-->
+        <div class="noi-dung">
+            <div class="form">
+                <h2>Đăng Nhập</h2>
+                <form action="./save-sign-in" method="POST">
+                    <div class="input-form">
+                        <span>Tên Người Dùng</span>
+                        <input type="text" name="username">
+                    </div>
+                    <div class="input-form">
+                        <span>Mật Khẩu</span>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="nho-dang-nhap">
+                        <p class="message"><?php echo e($msg); ?></p>
+                        <label><input type="checkbox" name=""> Nhớ Đăng Nhập</label>
+                    </div>
+                    <div class="input-form">
+                        <input type="submit" name="submit" value="Đăng Nhập">
+                    </div>
+                    <div class="input-form">
+                        <p>Bạn Chưa Có Tài Khoản? <a href="./register">Đăng Ký</a></p>
+                    </div>
+                </form>
+                <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
+                <ul class="icon-dang-nhap">
+                    <li><i class="fa fa-facebook" aria-hidden="true"><a href="https://www.facebook.com/"></a></i></li>
+                    <li><i class="fa fa-google" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                </ul>
             </div>
-            <div class="mb-3">
-                <label class="form-label">PASSWORD</label>
-                <input type="password" name="password" class="form-control">
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-            <p class="mt-3"><?php echo e($msg); ?></p>
-    </form>
-    </div>
+        </div>
+        <!--Kết Thúc Phần Nội Dung-->
+    </section>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\duan1\app\views/user/signIn.blade.php ENDPATH**/ ?>
