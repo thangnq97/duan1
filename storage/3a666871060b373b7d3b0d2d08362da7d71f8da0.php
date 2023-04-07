@@ -46,7 +46,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="./" class="simple-text">
-                    Trang chủ
+                    Home Page
                 </a>
             </div>
 

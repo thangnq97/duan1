@@ -44,6 +44,10 @@
             $ctr = new Cart();
             $ctr->removeCartByIndex();
             break;
+        case 'confirm-cart':
+            $ctr = new Cart();
+            $ctr->confirmCart();
+            break;
         case 'news':
             $ctr = new HomeController();
             $ctr->news();

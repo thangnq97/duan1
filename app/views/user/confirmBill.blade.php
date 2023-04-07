@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="thongtin.css">
+    <link rel="stylesheet" href="./public/css/bill.css">
 </head>
 
 <body>
@@ -35,32 +35,28 @@
         <div class="noi-dung">
             <div class="form">
                 <h2>Xác nhận đặt hàng</h2>
-                <form action="">
+                <form action="" method="POST">
                     <div class="input-form">
-                        <span>Tên Người Dùng</span>
-                        <input type="text" name="">
+                        <span>Tên Khách Hàng</span>
+                        <input type="text" name="fullname">
                     </div>
                     <div class="input-form">
                         <span>Số điện thoại</span>
-                        <input type="password" name="">
+                        <input type="password" name="phone">
                     </div>
 
                     <div class="input-form">
                         <span>Email</span>
-                        <input type="password" name="">
+                        <input type="password" name="email">
                     </div>
 
                     <div class="input-form">
                         <span>Địa chỉ</span>
-                        <input type="password" name="">
-                    </div>
-                    
-                    <div class="nho-dang-nhap">
-                        <input type="text" placeholder="Voucher 🔽">
+                        <input type="password" name="address">
                     </div>
 
                     <div class="input-form">
-                        <input type="submit" value="Đặt hàng">
+                        <input type="submit" name="submit" value="Đặt hàng">
                     </div>
                     
                 </form>

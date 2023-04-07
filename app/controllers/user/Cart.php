@@ -4,6 +4,7 @@
     use App\Models\Admin\Product;
     use App\Models\User\Size;
     use App\Models\User\Topping;
+    use App\Models\User\Voucher;
 
     class Cart extends BaseController {
         public function addCart() {
@@ -64,9 +65,18 @@
             endforeach;
             // echo '<pre>';
             // var_dump($data);
+            $voucher = Voucher::where('min_price', "<=", $total_price)->get();
+            $vouchers = ($voucher) ? $voucher : null;
+            $allVoucher = Voucher::all();
+            $minVoucher = Voucher::where('id', ">=", 0)->orderBy('min_price', 'ASC')->take(1)->get();
+            // echo '<pre>';
+            // var_dump($minVoucher[0]->min_price);die;
             $this->render('user.showCart',[
                                             'data' => $data,
-                                            'total_price' => $total_price
+                                            'total_price' => $total_price,
+                                            'vouchers' => $vouchers,
+                                            'all_voucher' => $allVoucher,
+                                            'min_price' => $minVoucher
                                           ]);
         }
 
@@ -76,7 +86,8 @@
         }
 
         public function confirmCart() {
-
+            // var_dump($_POST);die;
+            $this->render('user.confirmBill', []);
         }
     }
 ?>

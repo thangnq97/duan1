@@ -24,11 +24,11 @@
                 <form action="./save-sign-in" method="POST">
                     <div class="input-form">
                         <span>Tên Người Dùng</span>
-                        <input type="text" name="username">
+                        <input type="text" name="username" autocomplete="off">
                     </div>
                     <div class="input-form">
                         <span>Mật Khẩu</span>
-                        <input type="password" name="password">
+                        <input type="password" name="password" autocomplete="off">
                     </div>
                     <div class="nho-dang-nhap">
                         <p class="message">{{$msg}}</p>

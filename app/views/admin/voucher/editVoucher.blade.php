@@ -11,6 +11,11 @@
             <input type="text" name="discount" class="form-control" value="{{$voucher->discount}}" required>
             <div class="help-block with-errors"></div>
         </div>
+        <div class="form-group">
+            <label class="control-label">Min Price</label>
+            <input type="text" name="min_price" class="form-control" value="{{$voucher->min_price}}" required>
+            <div class="help-block with-errors"></div>
+        </div>
         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
