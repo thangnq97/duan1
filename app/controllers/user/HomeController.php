@@ -116,7 +116,7 @@
                             die;
                         }
                     }else {
-                        var_dump($_POST);die;
+                        // var_dump($_POST);die;
                         $msg = 'Tài khoản hoặc mật khẩu không đúng';
                         header("location: ./sign-in?msg=$msg");
                         die;

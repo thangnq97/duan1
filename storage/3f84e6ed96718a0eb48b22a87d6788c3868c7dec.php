@@ -22,9 +22,9 @@
             <table id="cart" class="table table-hover table-condensed"> 
                 <thead> 
                 <tr> 
-                <th style="width:30%">Tên sản phẩm</th> 
+                <th style="width:23%">Tên sản phẩm</th> 
                 <th style="width:20%">Mô tả</th> 
-                <th style="width:10%">Topping</th> 
+                <th style="width:17%">Topping</th> 
                 <th style="width:8%">Số lượng</th> 
                 <th style="width:22%" class="text-center">Thành tiền</th> 
                 <th style="width:10%"> </th> 
@@ -52,14 +52,37 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td><a href="./all-product" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
-                    </td> 
+                    <td colspan="4" class="hidden-xs"> </td> 
+                    <td class="hidden-xs text-center"><strong>Tổng: <span  class="price"><?php echo e($total_price); ?></span> đ</strong></td>
                     <td></td> 
-                <td colspan="2" class="hidden-xs"> </td> 
-                <td class="hidden-xs text-center"><strong>Tổng tiền: <?php echo e($total_price); ?> đ</strong>
-                </td> 
-                <td><a href="./confirm-cart" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
-                </td> 
+                </tr>
+                <tr>
+                    <td>
+                        <a href="./all-product" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    </td>
+                    <td class="hidden-xs min-price">Mua ít nhất <?php echo e($min_price[0]->min_price); ?>đ để nhận voucher</td>
+                    <td class="text-right"></td>
+                    <form action="./confirm-cart" method="POST">
+                        <td>
+                            <?php if($vouchers): ?>
+                                <select class="voucher" name="voucher">
+                                        <option value="0">--Chọn Voucher--</option>
+                                    <?php $__currentLoopData = $vouchers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $voucher): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($voucher->id); ?>">
+                                            <?php echo e($voucher->name); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            <?php endif; ?>
+                        </td>
+                        <td class="hidden-xs text-center">
+                            <strong>Tổng tiền: <span class="total-price"><?php echo e($total_price); ?></span> đ</strong>
+                        </td>
+                        <td>
+                            <input type="submit" value="Thanh toán" name="submit" class="btn btn-success btn-block">
+                        </td>
+                    </form>
                 </tr> 
                 </tfoot> 
             </table>
@@ -82,14 +105,10 @@
                         </td>
                         <td data-th="Product"></td>
                         <td data-th="Product">
-                            
-                            
-                           
                         </td>
                         <td data-th="Product"><p class="nomargin"></p></td> 
                         <td data-th="Product" class="text-center"><p class="nomargin"></p></td> 
                         <td class="actions" data-th="">
-                            
                         </td> 
                     </tr>
                 </tbody>
@@ -101,14 +120,32 @@
                 <td colspan="2" class="hidden-xs"> </td> 
                 <td class="hidden-xs text-center"><strong>Tổng tiền: 0đ</strong>
                 </td> 
-                <td><a href="./confirm-cart" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                <td>
                 </td> 
                 </tr> 
                 </tfoot> 
             </table> 
             <h3>Giỏ hàng trống</h3>
-            <a href="./all-product">Tiếp tục đặt hàng</a>
         <?php endif; ?>
        </div>
+       <script>
+            var data = <?php echo json_encode($all_voucher, 15, 512) ?>;
+            // console.log(data[0]);
+            var price = document.querySelector('.price');
+            var voucher = document.querySelector('.voucher');
+            var totalPrice = document.querySelector('.total-price');
+
+            voucher.addEventListener('change', () => {
+                var discount = data.filter(ele => ele.id == voucher.value);
+                // console.log(discount[0].discount);
+                console.log(discount);
+                if(discount.length > 0) {
+                    totalPrice.innerText = price.innerText - discount[0].discount;
+                }else {
+                    totalPrice.innerText = price.innerText;
+                }
+                // console.log(totalPrice.innerText);
+            })
+       </script>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\duan1\app\views/user/showCart.blade.php ENDPATH**/ ?>

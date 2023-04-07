@@ -4,6 +4,7 @@
             <th>ID</th>
             <th>NAME</th>
             <th>Discount</th>
+            <th>Min Price</th>
             <th>
                 <a class="btn btn-success" href="./add-voucher">Add new</a>
             </th>
@@ -14,6 +15,7 @@
                 <td><?php echo e($voucher->id); ?></td>
                 <td><?php echo e($voucher->name); ?></td>
                 <td><?php echo e($voucher->discount); ?></td>
+                <td><?php echo e($voucher->min_price); ?></td>
                 <td>
                     <a class="btn btn-primary" href="./edit-voucher?id=<?php echo e($voucher->id); ?>">Edit</a>
                     <a class="btn btn-danger" onclick="return confirm('Are you sure')" href="./delete-voucher?id=<?php echo e($voucher->id); ?>">Delete</a>

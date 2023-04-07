@@ -5,7 +5,7 @@
     class Bill extends Model {
         protected $table = "bill";
 
-        public $fillable = ['fullname', 'phone', 'email', 'address', 'status', 'user_id'];
+        public $fillable = ['fullname', 'phone', 'email', 'address'];
 
         const CREATED_AT = 'create_at';
         const UPDATED_AT = 'update_at';

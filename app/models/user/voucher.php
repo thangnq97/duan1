@@ -5,7 +5,7 @@
     class Voucher extends Model {
         protected $table = "voucher";
 
-        public $fillable = ['name', 'discount'];
+        public $fillable = ['name', 'discount', 'min_price'];
 
         public $timestamps = false;
     }

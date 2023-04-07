@@ -5,7 +5,7 @@
     class BillDetail extends Model {
         protected $table = "bill_detail";
 
-        public $fillable = ['total_price', 'bill_id', 'variation_id'];
+        public $fillable = ['total_price', 'bill_id', 'voucher_id'];
 
         public $timestamps = false;
     }
