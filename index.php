@@ -1,5 +1,6 @@
 <?php
     session_start();
+    date_default_timezone_set("Asia/Bangkok");
 
     // mong muốn tất cả các request đều đi qua file index.php
     $url = isset($_GET['url']) ? $_GET['url'] : '/';
@@ -47,6 +48,10 @@
         case 'confirm-cart':
             $ctr = new Cart();
             $ctr->confirmCart();
+            break;
+        case 'save-confirm-cart':
+            $ctr = new Cart();
+            $ctr->saveConfirmCart();
             break;
         case 'news':
             $ctr = new HomeController();

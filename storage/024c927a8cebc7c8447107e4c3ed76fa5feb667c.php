@@ -35,26 +35,26 @@
         <div class="noi-dung">
             <div class="form">
                 <h2>Xác nhận đặt hàng</h2>
-                <form action="" method="POST">
+                <form action="./save-confirm-cart" method="POST">
                     <div class="input-form">
                         <span>Tên Khách Hàng</span>
                         <input type="text" name="fullname">
                     </div>
                     <div class="input-form">
                         <span>Số điện thoại</span>
-                        <input type="password" name="phone">
+                        <input type="text" name="phone">
                     </div>
 
                     <div class="input-form">
                         <span>Email</span>
-                        <input type="password" name="email">
+                        <input type="email" name="email">
                     </div>
 
                     <div class="input-form">
                         <span>Địa chỉ</span>
-                        <input type="password" name="address">
+                        <input type="text" name="address">
                     </div>
-
+                    <input type="hidden" name="voucher" value="<?php echo e($voucher); ?>">
                     <div class="input-form">
                         <input type="submit" name="submit" value="Đặt hàng">
                     </div>

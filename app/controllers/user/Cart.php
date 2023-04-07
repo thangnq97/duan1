@@ -2,6 +2,7 @@
     namespace App\Controllers\User;
     use App\Controllers\BaseController;
     use App\Models\Admin\Product;
+    use App\Models\User\Bill;
     use App\Models\User\Size;
     use App\Models\User\Topping;
     use App\Models\User\Voucher;
@@ -63,6 +64,7 @@
                 array_push($data,[$product, $size, $sugar, $ice, $topping, $quanity, $price]);
                 unset($topping);
             endforeach;
+            $_SESSION['total_price'] = $total_price;
             // echo '<pre>';
             // var_dump($data);
             $voucher = Voucher::where('min_price', "<=", $total_price)->get();
@@ -86,8 +88,51 @@
         }
 
         public function confirmCart() {
+            // echo "<pre>";
+            // var_dump($_SESSION['cart']);die;
+            $voucher = isset($_POST['voucher']) ? $_POST['voucher'] : null;
+            $this->render('user.confirmBill', ['voucher' => $voucher]);
+        }
+
+
+        public function saveConfirmCart() {
+            // echo "<pre>";
+            // var_dump($_SESSION['cart']);die;
             // var_dump($_POST);die;
-            $this->render('user.confirmBill', []);
+            $data = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+            $voucher = isset($_POST['voucher']) ? $_POST['voucher'] : null;
+            $user = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+            $bill = $_POST;
+            $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
+            
+            $bill = new Bill();
+            $bill->fill($_POST);
+            $bill->total_price = $total_price;
+            $bill->user_id = $user;
+            // var_dump($voucher);die;
+            if($voucher) {
+                $bill->voucher_id = $voucher;
+            }
+            $bill->save();
+
+            $bill_id = $bill->id;
+            foreach($data as $item) {
+               $variation = new VariationHandler();
+               $variation_id = $variation->saveVariation($item, $bill_id);
+               if(isset($item['topping'])) {
+                foreach($item['topping'] as $top) {
+                    $product_topping = new VariationHandler;
+                    // $top_num = intval($top);
+                    $product_topping->saveProductTopping($item[1], $variation_id, $top);
+                }
+               }else {
+                    $product_topping = new VariationHandler();
+                    $product_topping->saveProductTopping($item[1], $variation_id);
+               }
+            }
+            unset($_SESSION['cart']);
+            unset($_SESSION['total_price']);
+            header('location:./show-cart');
         }
     }
 ?>
