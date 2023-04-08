@@ -17,7 +17,8 @@
                     <li><a href="./all-product">Sản Phẩm</a></li>
                     <li><a href="./news">Giới Thiệu</a></li>
                     <li><a href="./show-cart">Giỏ hàng</a></li>
-                </ul> 
+                </ul>
+                <a href="./admin">Đăng nhập admin</a> 
             </div>
     </div>
     <div class="banner">

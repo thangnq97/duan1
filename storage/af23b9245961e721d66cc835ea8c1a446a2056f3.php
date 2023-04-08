@@ -17,7 +17,7 @@
                   <li><a href="./">Trang Chủ</a></li>
                   <li><a href="./all-product">Sản Phẩm</a></li>
                   <li><a href="./news">Giới Thiệu</a></li>
-                  <li><a href="./showcard">Giỏ hàng</a></li>
+                  <li><a href="./show-cart">Giỏ hàng</a></li>
                 </ul>
               </div>
               <div class="banner-img" style="margin-top: 10px;">
