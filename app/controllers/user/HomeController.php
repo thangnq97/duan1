@@ -14,10 +14,34 @@
     class HomeController extends BaseController{
         
         public function index() {
-            $listItem = Product::all()->take(8);
-            $brands = Brand::all();   
+            $brands = Brand::where('status', 'Còn hàng')->get();
+            $brands_id = [];
+            foreach($brands as $brand) {
+                array_push($brands_id, $brand->id);
+            }
+
+            $listItem = [];
+            $products = Product::all();
+            foreach($products as $product) {
+                foreach($brands_id as $brand_id) {
+                    if($product->brand_id == $brand_id) {
+                        array_push($listItem, $product);
+                    }
+                }
+            }
+
+            $result = [];
+            if(count($listItem) > 7) {
+                for ($i=0; $i < 8; $i++) { 
+                    array_push($result,$listItem[$i]);
+                }
+            }else {
+                $result = $listItem;
+            }
+            // echo '<pre>';
+            // var_dump($result);die;
             $this->render('user.home', [
-                                    'listItem' => $listItem,
+                                    'listItem' => $result,
                                     'brands' => $brands
                                 ]);
         }
@@ -34,14 +58,42 @@
             }
             if(isset($_GET['search'])) {
                 $search = $_GET['search'];
-                $listItem = Product::where('name', 'LIKE', '%'.$search.'%')->get();
-            }else{
-                $msg = 'Không tìm thấy sản phẩm';
+                $listName = Product::where('name', 'LIKE', '%'.$search.'%')->get();
+
+                $brands = Brand::where('status', 'Còn hàng')->get();
+                $brands_id = [];
+                foreach($brands as $brand) {
+                    array_push($brands_id, $brand->id);
+                }
+
+                $listItem = [];
+                foreach($listName as $item) {
+                    foreach($brands_id as $brand_id) {
+                        if($item->brand_id == $brand_id) {
+                            array_push($listItem, $item);
+                        }
+                    }
+                }
             }
+
             if(!isset($_GET['id']) && !isset($_GET['search'])) {
-                $listItem = Product::all();
+                $brands = Brand::where('status', 'Còn hàng')->get();
+                $brands_id = [];
+                foreach($brands as $brand) {
+                    array_push($brands_id, $brand->id);
+                }
+
+                $listItem = [];
+                $products = Product::all();
+                foreach($products as $product) {
+                    foreach($brands_id as $brand_id) {
+                        if($product->brand_id == $brand_id) {
+                            array_push($listItem, $product);
+                        }
+                    }
+                }
             }
-            $brands = Brand::all();
+            $brands = Brand::where('status', 'Còn hàng')->get();
             $this->render('user.allProduct',[
                                             'listItem' => $listItem,
                                             'brands' => $brands,

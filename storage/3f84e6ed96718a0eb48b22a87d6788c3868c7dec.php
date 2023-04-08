@@ -125,7 +125,10 @@
                 </tr> 
                 </tfoot> 
             </table> 
-            <h3>Giỏ hàng trống</h3>
+            <div class="message">
+                <h3>Giỏ hàng trống</h3>
+                <p><?php echo e($msg); ?></p>
+            </div>
         <?php endif; ?>
        </div>
        <script>

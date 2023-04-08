@@ -10,7 +10,8 @@
 
     use App\Controllers\Admin\AdminHomeController;
     use App\Controllers\Admin\BannerController;
-    use App\Controllers\Admin\BrandController;
+use App\Controllers\Admin\BillController;
+use App\Controllers\Admin\BrandController;
     use App\Controllers\Admin\CommentController;
     use App\Controllers\User\HomeController;
     use App\Controllers\Admin\ProductController;
@@ -28,6 +29,26 @@
         case 'admin':
             $ctr = new AdminHomeController();
             $ctr->index();
+            break;
+        case 'bill-manager':
+            $ctr = new BillController();
+            $ctr->index();
+            break;
+        case 'update-brand':
+            $ctr = new BrandController();
+            $ctr->updateBrand();
+            break;
+        case 'bill-detail':
+            $ctr = new BillController();
+            $ctr->billDetail();
+            break;
+        case 'update-bill':
+            $ctr = new BillController();
+            $ctr->updateBill();
+            break;
+        case 'cancel-bill':
+            $ctr = new BillController();
+            $ctr->cancelBill();
             break;
         case 'add-cart':
             $ctr = new Cart();

@@ -65,20 +65,24 @@
                 unset($topping);
             endforeach;
             $_SESSION['total_price'] = $total_price;
+
+            $now = date('Y-m-d H:i:s');
             // echo '<pre>';
             // var_dump($data);
-            $voucher = Voucher::where('min_price', "<=", $total_price)->get();
+            $voucher = Voucher::where('min_price', "<=", $total_price)->where('quanity', ">", 0)->where('expired', ">=", $now)->get();
             $vouchers = ($voucher) ? $voucher : null;
             $allVoucher = Voucher::all();
             $minVoucher = Voucher::where('id', ">=", 0)->orderBy('min_price', 'ASC')->take(1)->get();
             // echo '<pre>';
-            // var_dump($minVoucher[0]->min_price);die;
+            // var_dump($voucher);die;
+            $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
             $this->render('user.showCart',[
                                             'data' => $data,
                                             'total_price' => $total_price,
                                             'vouchers' => $vouchers,
                                             'all_voucher' => $allVoucher,
-                                            'min_price' => $minVoucher
+                                            'min_price' => $minVoucher,
+                                            'msg' => $msg
                                           ]);
         }
 
@@ -112,6 +116,10 @@
             // var_dump($voucher);die;
             if($voucher) {
                 $bill->voucher_id = $voucher;
+                $voucherEdit = Voucher::find($voucher);
+                $voucher_quanity = $voucherEdit->quanity - 1;
+                $voucherEdit->quanity = $voucher_quanity;
+                $voucherEdit->save();
             }
             $bill->save();
 
@@ -132,7 +140,8 @@
             }
             unset($_SESSION['cart']);
             unset($_SESSION['total_price']);
-            header('location:./show-cart');
+            $msg = 'Đơn hàng đã được đặt thành công, vui lòng để ý điện thoại!';
+            header("location:./show-cart?msg=$msg");
         }
     }
 ?>

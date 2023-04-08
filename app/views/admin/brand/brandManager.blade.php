@@ -4,6 +4,7 @@
         <thead>
             <th>ID</th>
             <th>NAME</th>
+            <th>STATUS</th>
             <th>
                 <a class="btn btn-success" href="./add-brand">Add new</a>
             </th>
@@ -13,6 +14,7 @@
             <tr>
                 <td>{{$brand->id}}</td>
                 <td>{{$brand->name}}</td>
+                <td><a onclick="return confirm('Are you sure?')" class="btn btn-primary" href="./update-brand?id={{$brand->id}}">{{$brand->status}}</a></td>
                 <td>
                     <a class="btn btn-primary" href="./edit-brand?id={{$brand->id}}">Edit</a>
                     <a class="btn btn-danger" onclick="return confirm('Are you sure')" href="./delete-brand?id={{$brand->id}}">Delete</a>

@@ -79,5 +79,36 @@
             Brand::destroy($id);
             header('location:./brand-manager');
         }
+
+        public function updateBrand() {
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+            if(!$id){
+                header('location:./brand-manager');
+                die;
+            }
+
+            $brand = Brand::find($id);
+            if(!$brand){
+                header('location:./brand-manager');
+                die;
+            }
+
+            if($brand->status == 'Còn hàng') {
+                $brand->status = 'Hết hàng';
+                $brand->save();
+                header('location:./brand-manager');
+                die;
+            }
+
+            if($brand->status == 'Hết hàng') {
+                $brand->status = 'Còn hàng';
+                $brand->save();
+                header('location:./brand-manager');
+                die;
+            }
+
+            header('location:./brand-manager');
+        }
     }
 ?>
