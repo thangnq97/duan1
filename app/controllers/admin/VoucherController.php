@@ -21,6 +21,7 @@ use App\Models\User\Voucher;
                 $data = $_POST;
                 $voucher = new Voucher();
                 $voucher->fill($data);
+                $voucher->expired = $data['expired'];
                 $voucher->save();
             }
             header('location:./voucher-manager');
@@ -56,6 +57,12 @@ use App\Models\User\Voucher;
             }
 
             $data = $_POST;
+            if(!empty($data['expired'])) {
+                $voucher->expired = $data['expired'];
+            }else {
+                $expired = $voucher->expired;
+                $voucher->expired = $expired;
+            }
             $voucher->fill($data);
             $voucher->save();
             header('location:./voucher-manager');

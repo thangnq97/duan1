@@ -64,3 +64,13 @@
 .voucher:focus {
     border: 0.5px solid #3fbaf3;
 }
+.message {
+    display: flex;;
+    justify-content: space-around;
+    align-items: center;
+}
+.message p {
+    font-size: 17px;
+    font-weight: 500;
+    color: red;
+}

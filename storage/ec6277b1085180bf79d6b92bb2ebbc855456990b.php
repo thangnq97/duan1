@@ -15,6 +15,16 @@
             <input type="text" name="min_price" class="form-control" required>
             <div class="help-block with-errors"></div>
         </div>
+        <div class="form-group">
+            <label class="control-label">Quanity</label>
+            <input type="number" name="quanity" class="form-control" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Expired</label>
+            <input type="date" name="expired" class="form-control" required>
+            <div class="help-block with-errors"></div>
+        </div>
         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </form>
 <?php $__env->stopSection(); ?>

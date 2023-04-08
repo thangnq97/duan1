@@ -124,7 +124,10 @@
                 </tr> 
                 </tfoot> 
             </table> 
-            <h3>Giỏ hàng trống</h3>
+            <div class="message">
+                <h3>Giỏ hàng trống</h3>
+                <p>{{$msg}}</p>
+            </div>
         @endif
        </div>
        <script>
