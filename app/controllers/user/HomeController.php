@@ -8,8 +8,11 @@
     use App\Models\Admin\Brand;
     use App\Models\Admin\Comment;
     use App\Models\Admin\User;
-    use App\Models\User\Size;
+use App\Models\User\Bill;
+use App\Models\User\ProductTopping;
+use App\Models\User\Size;
     use App\Models\User\Topping;
+use App\Models\User\Variation;
 
     class HomeController extends BaseController{
         
@@ -40,9 +43,11 @@
             }
             // echo '<pre>';
             // var_dump($result);die;
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             $this->render('user.home', [
                                     'listItem' => $result,
-                                    'brands' => $brands
+                                    'brands' => $brands,
+                                    'user' => $user
                                 ]);
         }
 
@@ -103,22 +108,55 @@
 
         public function productDetail() {
             $id = isset($_GET['id']) ? $_GET['id'] : null;
-            if($id) {
-                $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-                $size = Size::all();
-                $topping = Topping::all();
-                $comments = Comment::where('product_id', '=', $id)->get();
-                $users = User::all();
-                $item = Product::find($id);
-                $this->render('user.productDetail', [
-                                                    'item' => $item,
-                                                    'comments' => $comments,
-                                                    'users' => $users,
-                                                    'user' => $user,
-                                                    'sizes' => $size,
-                                                    'topping' => $topping
-                                                    ]);
+            if(!$id) {
+                header('location: ./');
+                die;
             }
+
+            $product = Product::find($id);
+            if(!$product) {
+                header('location: ./');
+                die;
+            }
+            
+            $product->views = $product->views + 1;
+            $product->save();
+
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+            $user_id = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+
+            $bills = Bill::where('user_id', $user_id)->get();
+            $check = false;
+            foreach($bills as $bill) {
+                $bill_status = $bill->status;
+                if($bill_status == 'Thành công') {
+                    $bill_id = $bill->id;
+                    $vars = Variation::where('bill_id',  $bill_id)->get();
+                    foreach($vars as $var) {
+                        $var_id = $var->id;
+                        $allProTop = ProductTopping::where('variation_id', $var_id)->get();
+                        foreach($allProTop as $item) {
+                            if($item->product_id == $id) {
+                                $check = true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            $user = $check ? $user : null;
+            
+            $size = Size::all();
+            $topping = Topping::all();
+            $comments = Comment::where('product_id', '=', $id)->get();
+            $item = Product::find($id);
+            $this->render('user.productDetail', [
+                                                'item' => $item,
+                                                'comments' => $comments,
+                                                'user' => $user,
+                                                'sizes' => $size,
+                                                'topping' => $topping
+                                                ]);
         }
 
         public function register() {
@@ -192,6 +230,7 @@
 
         public function forgotPassword() {
             $users = User::all();
+            $msg = '';
             if(isset($_POST['submit'])) {
                 $email = $_POST['email'];
                 $username = $_POST['username'];
@@ -199,13 +238,16 @@
                     if(!empty($email) && !empty($username)) {
                         if($user->email == $email && $user->username == $username) {
                             $password = $user->password;
-                            header("location: ./forgot-password?msg=$password");
+                            $msg = $password;
+                            header("location: ./forgot-password?msg=$msg");
                             die;
                         }
                     }
                 }
+                $msg = 'Không tìm thấy tài khoản';
+                header("location:./forgot-password?msg=$msg");
             }
-            header('location:./forgot-password?msg=không tìm thấy tài khoản');
+            
         }
 
         public function editPassword() {

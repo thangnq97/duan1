@@ -86,13 +86,6 @@ use App\Models\User\Variation;
             }
 
             if($bill->status == 'Đang giao hàng') {
-                $bill->status = 'Đã nhận hàng và thanh toán';
-                $bill->save();
-                header('location: ./bill-manager');
-                die;
-            }
-
-            if($bill->status == 'Đã nhận hàng') {
                 $bill->status = 'Thành công';
                 $bill->save();
                 header('location: ./bill-manager');
@@ -120,8 +113,10 @@ use App\Models\User\Variation;
                 die;
             }
 
-            $bill->status = 'Đã hủy';
-            $bill->save();
+            if($bill->status != 'Thành công') {
+                $bill->status = 'Đã hủy';
+                $bill->save();
+            }
             header('location: ./bill-manager');
         }
     }

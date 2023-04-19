@@ -24,11 +24,6 @@
             </div> 
             <div class="list-menu">
                 <h1>ToCoToCo MENU</h1>
-            </div>  
-            <div class="login">
-               
-                   <a href="./sign-in"><input type="submit" value="Login"></a>
-               
             </div>
             </div>
             <div class="content">

@@ -70,12 +70,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./banner-manager">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Banner Manager</p>
-                    </a>
-                </li>
-                <li>
                     <a href="./comment-manager">
                         <i class="pe-7s-chat"></i>
                         <p>Comment Manager</p>

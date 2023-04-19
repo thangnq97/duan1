@@ -24,7 +24,7 @@
           <input type="password" placeholder="Nhập Lại Mật Khẩu" name="psw-repeat" required>
       
           <label for="psw-repeat"><b>Email</b></label>
-          <input type="text" placeholder="Nhập email" name="email" required>
+          <input type="email" placeholder="Nhập email" name="email" required>
 
           <label>
             <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Nhớ Đăng Nhập

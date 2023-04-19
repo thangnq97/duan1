@@ -40,6 +40,9 @@
                     <div class="input-form">
                         <p>Bạn Chưa Có Tài Khoản? <a href="./register">Đăng Ký</a></p>
                     </div>
+                    <div class="input-form">
+                        <p><a href="./forgot-password">Quên Mật Khẩu</a></p>
+                    </div>
                 </form>
                 <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
                 <ul class="icon-dang-nhap">

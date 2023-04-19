@@ -5,7 +5,7 @@
             <th>PRODUCT</th>
             <th>SIZE</th>
             <th>TOPPING</th>
-            <th>QUANITY</th>
+            <th>QUANTITY</th>
             <th><a class="btn btn-primary" href="./bill-manager">Back</a></th>
         </thead>
         <tbody>

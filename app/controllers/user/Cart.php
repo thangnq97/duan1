@@ -6,6 +6,8 @@
     use App\Models\User\Size;
     use App\Models\User\Topping;
     use App\Models\User\Voucher;
+    use App\Models\User\Variation;
+    use App\Models\User\ProductTopping;
 
     class Cart extends BaseController {
         public function addCart() {
@@ -142,6 +144,67 @@
             unset($_SESSION['total_price']);
             $msg = 'Đơn hàng đã được đặt thành công, vui lòng để ý điện thoại!';
             header("location:./show-cart?msg=$msg");
+        }
+
+        public function history() {
+            $user_id = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+            if(!$user_id) {
+                header('location: ./');
+            }
+
+            $bills = Bill::where('user_id', $user_id)->get();
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+            $this->render('user.history', ['bills' =>$bills, 'user' =>$user]);
+        }
+
+        public function historyDetail() {
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+            if(!$id) {
+                header('location: ./bill-manager');
+                die;
+            }
+
+            $bill = Bill::find($id);
+            if(!$bill) {
+                header('location: ./bill-manager');
+                die;
+            }
+
+            $variations = Variation::where('bill_id', $id)->get();
+            // echo '<pre>';
+            // var_dump($variations);die;
+            $data = [];
+            foreach($variations as $var) {
+                $var_id = $var->id;
+                $product_topping = ProductTopping::where('variation_id', $var_id)->take(1)->get();
+                $pro_id = $product_topping[0]->product_id;
+                $product_name = Product::find($pro_id)->name;
+
+                $quanity = $var->quanity;
+
+                $size_id = $var->size_id;
+                $size = Size::find($size_id)->name;
+
+                $product_topping = ProductTopping::where('variation_id', $var_id)->get();
+                $allTopping = [];
+                foreach($product_topping as $item) {
+                    $pro_top = $item->id;
+                    $topping_id = ProductTopping::find($pro_top)->topping_id;
+                    if($topping_id) {
+                        $topping_name = Topping::find($topping_id)->name;
+                        array_push($allTopping,$topping_name);
+                    }
+                }
+                
+                array_push($data, [$product_name, $size, $allTopping, $quanity]);
+            }
+            // echo '<pre>';
+            // var_dump($data);die;
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+            $this->render('user.historyDetail',  [
+                                                        'data' => $data,
+                                                        'user' => $user
+                                                    ]);
         }
     }
 ?>
