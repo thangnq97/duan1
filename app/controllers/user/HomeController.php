@@ -149,11 +149,14 @@ use App\Models\User\Variation;
             $size = Size::all();
             $topping = Topping::all();
             $comments = Comment::where('product_id', '=', $id)->get();
+            $comments = isset($comments) ? $comments : [];
             $item = Product::find($id);
+            $users = User::all();
             $this->render('user.productDetail', [
                                                 'item' => $item,
                                                 'comments' => $comments,
                                                 'user' => $user,
+                                                'users' => $users,
                                                 'sizes' => $size,
                                                 'topping' => $topping
                                                 ]);
