@@ -5,7 +5,7 @@
             <th>NAME</th>
             <th>Discount</th>
             <th>Min Price</th>
-            <th>Quanity</th>
+            <th>Quantity</th>
             <th>Expired</th>
             <th>
                 <a class="btn btn-success" href="./add-voucher">Add new</a>

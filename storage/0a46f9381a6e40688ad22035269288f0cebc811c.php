@@ -12,13 +12,36 @@
         <div class="item-header">
             <div class="item-menu"> 
                 <ul>
-                    <li><a href="brand.html"> <img src="./public/imgs/Logo-ngang-01.png" alt=""></a></li>
+                    <li><a href=""> <img src="./public/imgs/Logo-ngang-01.png" alt=""></a></li>
                     <li><a href="./">Trang Chủ</a></li>
                     <li><a href="./all-product">Sản Phẩm</a></li>
                     <li><a href="./news">Giới Thiệu</a></li>
                     <li><a href="./show-cart">Giỏ hàng</a></li>
+                    <?php if($user): ?> {
+                      <li><a href="./history-cart">Lịch sử mua hàng</a></li>
+                    }
+                        
+                    <?php endif; ?>
                 </ul>
-                <a href="./admin">Đăng nhập admin</a> 
+                <?php if($user): ?>
+                  <div class="header-btn btn2">
+                    <div class="btn2-content1">
+                      <p>Xin chào <?php echo e($user['username']); ?>,</p>
+                      <a href="./sign-out">Sign out</a>
+                    </div>
+                    <?php if($user['role'] == 'admin'): ?>
+                      <div class="btn2-content2">
+                        <a href="./admin">Đăng nhập admin</a>
+                      </div>
+                    <?php endif; ?>
+                  </div>
+                <?php else: ?>
+                  <div class="header-btn btn1">
+                    <a href="./sign-in">Sign in</a>
+                    <a href="./register">Sign up</a>
+                  </div>
+                <?php endif; ?>
+                
             </div>
     </div>
     <div class="banner">
